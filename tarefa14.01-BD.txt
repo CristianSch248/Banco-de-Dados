@@ -1,0 +1,44 @@
+INSERT INTO unidade (codunidade, nomunidade) VALUES (1, 'colegio politecnico');
+
+INSERT INTO area (codarea, nomarea) VALUES (1, 'politecnico');
+
+INSERT INTO curso (codcurso, nomcurso, codunidade, codarea) VALUES (1, 'sistemas para internet', 1, 1);
+
+INSERT INTO aluno (codaluno, nomaluno, codcurso) VALUES (1, 'fulano', 1);
+
+INSERT INTO disciplina (coddisci, nomdisci) VALUES (1, 'banco_dados');
+
+INSERT INTO histórico (codaluno,
+		     coddisci,
+		     semestre,
+		     nota) VALUES (1, 1, 20201, 10.00);
+
+INSERT INTO histórico (codaluno,
+		     coddisci,
+		     semestre,
+		     nota) VALUES (1, 1, 20211, 10.00);
+
+CREATE OR REPLACE FUNCTION aprova() returns TRIGGER
+AS $$
+DECLARE aprova INT;
+BEGIN
+	SELECT COUNT(*) 
+	     FROM historico,
+	     WHERE nota >= 7,
+	     AND histórico.codaluno = 1,
+	     AND histórico.coddisci = 1;
+	
+	aprova:= count
+	
+	IF aprova > 1
+		HEN RAISE EXCEPTION 'o aluno não pode ser aprovado novamente ';
+	END IF;
+END;
+$$ LANGUAGE 'plpgsql';
+CREATE TRIGGER tAprovado AFTER UPDATE ON historico
+FOR EACH ROW EXECUTE PROCEDURE aprova();
+
+
+
+
+

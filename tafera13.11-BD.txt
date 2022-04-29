@@ -1,0 +1,22 @@
+CREATE TABLE curso
+(codcurso int,
+nomecurso varchar(50),
+primary key (codcurso));
+
+CREATE TABLE aluno
+(codaluno int,
+nomealuno varchar(50),
+codcurso int,
+primary key (codaluno),
+foreign key (codcurso) references curso(codcurso));
+
+
+INSERT INTO curso (codcurso, nomecurso) values (1,'sistemas para internet');
+INSERT INTO curso (codcurso, nomecurso) values (2,'engenharia civil');
+
+INSERT INTO aluno (codaluno, nomealuno, codcurso) values (1,'carlos',2);
+INSERT INTO aluno (codaluno, nomealuno, codcurso) values (2,'beatris',1);
+
+
+SELECT * FROM curso;
+SELECT * FROM aluno;

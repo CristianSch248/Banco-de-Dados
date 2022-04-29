@@ -1,0 +1,72 @@
+a) Listar os nomes dos clientes com os nomes dos produtos que eles compraram. Ordenar o resultado pelo
+nome do cliente
+SELECT nomcli, nomprod
+	FROM cliente, produto, compra
+	WHERE cliente.codcli = compra.codcli
+	AND produto.codprod = compra.codprod
+	ORDER BY nomcli;
+
+============================================================================================================
+b) Listar os nomes dos tipos de produto com os nomes dos respectivos produtos. Aqui liste inclusive os nomes
+dos tipos que não possuam produtos cadastrados
+
+SELECT nomtipo, nomprod
+	FROM tipo, produto
+	WHERE tipo.codtipo = produto.codtipo
+	NOT EXISTS (SELECT * FROM nomtipo, nomprod WHERE tipo.codtipo = produto.codtipo);
+
+============================================================================================================
+c) Listar os nomes dos vendedores que não orientaram nenhuma compra
+
+SELECT * FROM vendedor NOT EXISTS ( SELECT * FROM compra  WHERE compra.codvend = vendedor.codvend);
+
+============================================================================================================
+d) Listar quantos fornecedores fornecem o produto denominado “Água Sanitária”
+
+SELECT COUNT(*)
+	FROM fornecedor, produto
+	WHERE fornecedor.codprod = produto.codprod
+	AND nomprod = 'Água Sanitária';
+
+============================================================================================================
+e) Elabore um enunciado e depois uma consulta em SQL que envolva três tabelas
+
+VALOR QUE O FORNECEDOR FORNECE O PRODUTO PARA O VENDEDOR
+
+SELECT valor_prod__fornec
+	FROM fornecedor, produto, fornece
+	WHERE fornece.codprod = produto.codprod
+	AND fornece.fornec = fornecedor.fornec;
+============================================================================================================
+f) Elabore um enunciado e depois uma consulta em SQL que envolva quatro tabelas
+
+RETORNAR O NOME DO VENDEDOR, PRODUTO, TIPO E FABRICANTE
+
+SELECT nomvend, nomprod, nomtipo, nomfab
+	FROM vendedor, produto, compra, tipo, fabricante
+	WHERE tipo,codtipo = produto.codtipo
+	AND fabricante.codfab = produto.codfab
+	AND vendedor.codvend = compra.codvend
+	AND compra.codcompra = item_compra.codcompra
+
+============================================================================================================
+g) Elabore um enunciado e depois uma consulta em SQL que use o operador NOT IN ou NOT EXISTS e que
+envolva três tabelas (similar a C)
+
+nome do vendedor que não fez nenhuma venda do produto 2
+
+SELECT nomvend 
+	FROM vendedor
+	WHERE NOT EXISTS (SELECT * FROM item_compra, compra, produto 
+		WHERE compra.codcompra = item_compra.codcompra
+		AND produto.codprod = item_compra.codprod
+		AND codprod = 2);
+
+============================================================================================================
+h) Elabore uma enunciado e depois uma consulta em SQL que use duas tabelas e a função count(*)
+
+NOME DAS CIDADES QUE ESTÃO NO ESTADO DENOMIDADO "RS"
+SELECT COUNT(*) 
+	FROM cidade, estado
+	WHERE cidade.siglaestado = estado.siglaestado
+	AND estado.siglaestado = 'RS';

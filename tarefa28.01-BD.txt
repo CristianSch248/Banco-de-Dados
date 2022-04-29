@@ -1,0 +1,61 @@
+NN
+(codfilme, nomfilme, codgen, nomgen
+	(codavaliador, nomavaliador, nota_filme))
+
+1FN
+(codfilme, nomfilme, codgen, nomgen)
+(codfilme, codavaliador, nomavaliador, nota_filme)
+
+2FN
+(codFilme, nomFilme, codGen, nomGen)
+(codFilme, codAvaliador, nota_Filme)
+(codAvaliador, nomAvaliador)
+
+3FN
+(codFilme, nomFilme, codGen)
+(codFilme, codAvaliador, nota_Filme)
+(codAvaliador, nomAvaliador)
+(codGen, nomGen)
+
+CREATE TABLE genero(
+	codGen int, 
+	nomGen varchar(50),
+	PRIMARY KEY (codGen));
+
+CREATE TABLE avaliador(
+	codAvaliador int, 
+	nomAvaliador varchar(50)
+	PRIMARY KEY (codAvaliador));
+
+CREATE TABLE filme(
+	codFilme int, 
+	nomFilme varchar(50), 
+	codGen int,
+	PRIMARY KEY (codFilme),
+	FOREIGN KEY (codGen) REFERENCES genero(codGen));
+
+CREATE TABLE nota_Filme(
+	codFilme int, 
+	codAvaliador int, 
+	nota_Filme int
+	PRIMARY KEY (codFilme, codAvaliador),
+	FOREIGN KEY(codFilme) REFERENCES filme(codFilme),
+	FOREIGN KEY(codAvaliador) REFERENCES avaliador (codAvaliador));
+
+INSERT INTO genero (codGen, nomGen) VALUES (2, 'Suspense');
+INSERT INTO genero (codGen, nomGen) VALUES (3 , 'Policial');
+
+INSERT INTO avaliador (codAvaliador, nomAvaliador) VALUES (2, 'Joao');
+INSERT INTO avaliador (codAvaliador, nomAvaliador) VALUES (3, 'Maria');
+
+INSERT INTO filme (codFilme, nomFilme, codGen) VALUES (1, 'Psicose', 2);
+INSERT INTO filme (codFilme, nomFilme, codGen) VALUES (2, 'Maquina Mortifera', 3);
+INSERT INTO filme (codFilme, nomFilme, codGen) VALUES (3, 'Um Corpo que Cai', 2);
+
+INSERT INTO nota_Filme (codFilme, codAvaliador, nota_Filme) VALUES (1, 2, 10);
+INSERT INTO nota_Filme (codFilme, codAvaliador, nota_Filme) VALUES (1, 3, 9);
+INSERT INTO nota_Filme (codFilme, codAvaliador, nota_Filme) VALUES (2, 2, 7);
+INSERT INTO nota_Filme (codFilme, codAvaliador, nota_Filme) VALUES (2, 3, 8);
+INSERT INTO nota_Filme (codFilme, codAvaliador, nota_Filme) VALUES (3, 2, 9);
+INSERT INTO nota_Filme (codFilme, codAvaliador, nota_Filme) VALUES (3, 3, 10);
+

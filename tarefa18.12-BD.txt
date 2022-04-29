@@ -1,0 +1,21 @@
+1) Listar os nomes dos países com o número de criadores que pertencem a cada país
+
+SELECT pais.codpais, nomepais COUNT(*) 
+	FROM criador, pais
+	WHERE criador.codpais = pais.codpais
+	GROUP BY pais.codpais, nomepais;
+
+
+2) Listar os nomes dos criadores com o número de cavalos que cada um possui
+
+SELECT criador.codcriador, nomecriador COUNT(*) 
+	FROM criador, cavalo
+	WHERE criador.codcriador  = cavalo.codcriador
+	GROUP BY criador.codcriador, nomecriador;
+
+3) Listar os nomes dos cavalos com o número de provas por eles disputadas
+
+SELECT nomecavalo COUNT(*) 
+	FROM cavalo, disputa
+	WHERE cavalo.codcavalo = disputa.codcavalo
+	GROUP BY nomecavalo;

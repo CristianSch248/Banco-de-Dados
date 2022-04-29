@@ -1,0 +1,46 @@
+INSERT INTO estande (codest, nomest, val_aluguel, codfiscal) values (1,'Estande da Princesa',200.00,3);
+INSERT INTO estande (codest, nomest, val_aluguel, codfiscal) values (2,'Estande do Rei',200.00,2);
+INSERT INTO estande (codest, nomest, val_aluguel, codfiscal) values (3,'Estande do Doce',200.00,2);
+
+INSERT INTO estande_produto (codprod, codest, val_produto_estande) values (2,'1',4.00);
+INSERT INTO estande_produto (codprod, codest, val_produto_estande) values (3,'1',5.00);
+INSERT INTO estande_produto (codprod, codest, val_produto_estande) values (7,'1',7.00);
+
+INSERT INTO estande_produto (codprod, codest, val_produto_estande) values (2,'2',4.00);
+INSERT INTO estande_produto (codprod, codest, val_produto_estande) values (3,'2',5.00);
+
+INSERT INTO estande_produto (codprod, codest, val_produto_estande) values (2,'3',4.00);
+INSERT INTO estande_produto (codprod, codest, val_produto_estande) values (3,'3',5.00);
+
+INSERT INTO fiscal (codfiscal, nomfiscal, salario) values (2,'Beltrano de tal',7000.00);
+INSERT INTO fiscal (codfiscal, nomfiscal, salario) values (3,'Fulano de tal', 4000.00);
+
+INSERT INTO produto (codprod, nomprod) values (2,'Brigadeiro');
+INSERT INTO produto (codprod, nomprod) values (3,'Camafeu');
+INSERT INTO produto (codprod, nomprod) values (7,'Pastel de Santa Clara');
+
+1)Listar os dados dos fiscais
+SELECT * FROM fiscal;
+
+2)Listar o número de fiscais cadastrados
+SELECT count(*) FROM fiscal;
+
+3)Listar a média do salário dos fiscais
+SELECT avg(salario) FROM fiscal;
+
+4)Listar os nomes dos fiscais ordenando pelo salário
+SELECT nomfiscal FROM fiscal
+	ORDER BY salario;
+
+5)Listar os nomes dos fiscais com os nomes dos estandes
+SELECT * FROM fiscal,estande
+	WHERE
+	fiscal.nomfiscal = estande.nomest;
+
+6)Listar os nomes dos estantes, com os nomes dos produtos e o valor dos produtos em cada estandes
+SELECT * FROM estande,produto, estande_produto
+	WHERE
+	
+	AND
+	
+
